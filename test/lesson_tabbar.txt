@@ -1,0 +1,14 @@
+TabBarIOS
+	|- TabBarIOS.Item{
+		title:标题；
+		image:{systemImage(使用系统的图片，指的是App中的图片):icon（使用ReactNative中的图片）}；
+		{
+			显示视图
+		}
+
+//点击事件
+		onPress={
+			
+		}
+
+	}
