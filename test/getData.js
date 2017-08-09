@@ -7,10 +7,10 @@ import {
     TextInput
 } from 'react-native';
 import {Navigator} from "react-native-deprecated-custom-components";
-//http://project.lanou3g.com/projects/bj/reactnative/login.php?username=lanou&password=123 
-//传入url
+//http://project.lanou3g.com/projects/bj/reactnative/login.php?username=lanou&password=123
+//http://exp.zhidong.cn/init/1001?data={"mapx":"36.671323","appVersion":"2.0.7","resolutiony":"1776","mapy":"116.909925","brand":"htc","userId":"","deviceNo":"00000000-2d37-23e6-0000-00004014d1f3","ip":"fe80::5ceb:faff:fe1b:bf27%dummy0","osVersion":"6.0.1","type":"9","resolutionx":"1080"}
 function getRequest(url) {
-    var opts = { method: "GET" };
+    var opts = {method: "GET"};
     fetch(url, opts).then((response) => {
         return response.text();
     }).then((responseText) => {
@@ -20,25 +20,41 @@ function getRequest(url) {
     });
 }
 
-//界面
+function postRequest(url) {
+    var data = new FormData();
+    data.append("username", "显示个中文");
+    data.append("password", "698745213");
+    var opts = {method: "POST", body: data};
+    fetch(url, opts).then((response) => {
+        return response.text();
+    }).then((responseText) => {
+        alert(responseText)
+    }).catch((error) => {
+        alert(error);
+    });
+
+
+}
+
+
 var GetData = React.createClass({
     render: function () {
         return (
             <View style={styles.container}>
                 <TouchableOpacity
-                    onPress={getRequest.bind(this, "http://project.lanou3g.com/projects/bj/reactnative/login.php?username=lanou&password=123")}
+                    onPress={getRequest.bind(this, "http://192.168.200.58:8080/WebDemo/LoginServlet?username=lanou&password=123")}
                     style={styles.btn}>
                     <Text>GET</Text>
 
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.btn}>
+                <TouchableOpacity style={styles.btn} onPress={postRequest.bind(this, "http://192.168.200.58:8080/WebDemo/LoginServlet")}>
                     <Text>POST</Text>
                 </TouchableOpacity>
             </View>
         );
     }
 });
-//样式
+
 var styles = StyleSheet.create({
     container: {
         flex: 1,
